@@ -1,18 +1,9 @@
 -- SKILL_CODE값이 'Python'나, 'C#'을 나타내는 비트를 포함하는 개발자를 찾기
 -- 포함한다는 의미는 해당 기술을 나타내는 비트가 1로 설정되어 있음을 의미
 
-SELECT
-    ID,
-    EMAIL,
-    FIRST_NAME,
-    LAST_NAME
-FROM DEVELOPERS 
-WHERE
-    SKILL_CODE & (
-        SELECT SUM(CODE)
-        FROM SKILLCODES
-        WHERE NAME IN ("Python", "C#")
-    ) != 0
+SELECT ID, EMAIL, FIRST_NAME, LAST_NAME FROM DEVELOPERS
+WHERE SKILL_CODE & (SELECT CODE FROM SKILLCODES WHERE NAME = 'Python')
+    OR SKILL_CODE & (SELECT CODE FROM SKILLCODES WHERE NAME = 'C#')
 ORDER BY ID
 
 -- SELECT CODE FROM SKILLCODES WHERE NAME = 'Python'은 Python에 해당하는 비트 코드를 반환
