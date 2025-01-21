@@ -1,0 +1,8 @@
+-- 우유(Milk)와 요거트(Yogurt)를 동시에 구입한 장바구니
+SELECT CART_ID
+FROM CART_PRODUCTS 
+WHERE NAME = 'Milk' OR NAME = 'Yogurt'
+GROUP BY CART_ID
+HAVING COUNT(DISTINCT NAME) >= 2
+ORDER BY 1
+
